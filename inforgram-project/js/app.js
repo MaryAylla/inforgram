@@ -1,8 +1,6 @@
-// IMPORTAÇÕES
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, deleteDoc, doc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-// CONFIGURAÇÃO
 const firebaseConfig = {
     apiKey: "AIzaSyBCK5dJwPTeIeKRkNuuKtxRWbSyugBW3DI",
     authDomain: "inforgram-6ff38.firebaseapp.com",
@@ -17,23 +15,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const postsCollection = collection(db, "posts");
 
-// --- 1. LÓGICA DO FEED (RENDERIZAÇÃO) ---
 const feedContainer = document.getElementById('feed-container');
 
 if (feedContainer) {
     const q = query(postsCollection, orderBy("data", "desc"));
-    
+
     onSnapshot(q, (snapshot) => {
         feedContainer.innerHTML = '';
         snapshot.forEach((docSnap) => {
             const post = docSnap.data();
             const id = docSnap.id;
-            const likes = post.likes || 0; // Pega curtidas ou 0
-            
+            const likes = post.likes || 0; 
+
             const card = document.createElement('article');
             card.className = 'post-card';
-            
-            // Verifica se o usuário local já curtiu (localStorage)
+
             const likedClass = localStorage.getItem(`liked_${id}`) ? 'color: red;' : '';
             const iconType = localStorage.getItem(`liked_${id}`) ? 'favorite' : 'favorite_border';
 
@@ -66,19 +62,16 @@ if (feedContainer) {
                     Postado hoje
                 </div>
             `;
-            
-            // Evento Deletar
+
             card.querySelector('.delete-btn').addEventListener('click', () => deletePost(id));
-            
-            // Evento Curtir
-            card.querySelector('.like-btn').addEventListener('click', function() {
+
+            card.querySelector('.like-btn').addEventListener('click', function () {
                 handleLike(id, this);
             });
 
-            // Evento Comentar (Simulado)
             card.querySelector('.comment-btn').addEventListener('click', () => {
                 const comment = prompt("Escreva seu comentário:");
-                if(comment) alert("Comentário enviado! (Simulação)");
+                if (comment) alert("Comentário enviado! (Simulação)");
             });
 
             feedContainer.appendChild(card);
@@ -86,24 +79,19 @@ if (feedContainer) {
     });
 }
 
-// --- 2. FUNÇÃO DE CURTIR (REAL) ---
 async function handleLike(id, btnElement) {
-    // Verifica se já curtiu localmente para evitar flood
     if (localStorage.getItem(`liked_${id}`)) {
         return alert("Você já curtiu esse post!");
     }
 
-    // Efeito visual imediato
     const icon = btnElement.querySelector('span');
-    icon.textContent = 'favorite'; // Muda ícone para preenchido
+    icon.textContent = 'favorite'; 
     icon.style.color = 'red';
-    
-    // Salva no navegador que essa pessoa curtiu
+
     localStorage.setItem(`liked_${id}`, 'true');
 
     try {
         const postRef = doc(db, "posts", id);
-        // Atualiza no banco (Incrementa +1)
         await updateDoc(postRef, {
             likes: increment(1)
         });
@@ -112,7 +100,6 @@ async function handleLike(id, btnElement) {
     }
 }
 
-// --- 3. FUNÇÃO POSTAR (UNIFICADA E CORRIGIDA) ---
 const postForm = document.getElementById('post-form');
 
 if (postForm) {
@@ -121,8 +108,7 @@ if (postForm) {
         const username = document.getElementById('username').value;
         const message = document.getElementById('message').value;
         const btn = document.getElementById('btn-submit');
-        
-        // 3.1 Filtro de Palavrões (Mantido)
+
         const badWords = ['bobo', 'feio', 'palavrao'];
         if (badWords.some(w => message.toLowerCase().includes(w))) {
             alert("Mensagem bloqueada pelo filtro.");
@@ -132,18 +118,16 @@ if (postForm) {
         try {
             btn.textContent = "Enviando...";
             btn.disabled = true;
-            
-            // 3.2 Envio para o Banco (Com likes: 0)
+
             await addDoc(postsCollection, {
                 nome: username,
                 mensagem: message,
-                likes: 0, // Inicia com 0
+                likes: 0, 
                 data: serverTimestamp()
             });
-            
-            // 3.3 Redireciona de volta para o Feed
-            window.location.href = 'index.html'; 
-            
+
+            window.location.href = 'index.html';
+
         } catch (error) {
             console.error(error);
             alert("Erro ao postar");
@@ -152,9 +136,6 @@ if (postForm) {
     });
 }
 
-// --- 4. FUNÇÕES UTILITÁRIAS ---
-
-// Deletar Post
 async function deletePost(id) {
     if (confirm("Deseja apagar esta mensagem permanentemente?")) {
         try {
@@ -166,7 +147,6 @@ async function deletePost(id) {
     }
 }
 
-// Segurança XSS
 function escapeHtml(text) {
     if (!text) return "";
     return text.replace(/[&<>"']/g, function (m) {
@@ -174,7 +154,6 @@ function escapeHtml(text) {
     });
 }
 
-// Admin Status UI
 window.checkAdminStatus = function () {
     const loginForm = document.getElementById('admin-login-form');
     const logoutArea = document.getElementById('admin-logout-area');
@@ -190,7 +169,6 @@ window.checkAdminStatus = function () {
     }
 }
 
-// Função de abrir Mídia Única (Notificações)
 window.openSingleMedia = function (mediaSrc) {
     clearTimeout(storyTimer);
 
@@ -199,9 +177,8 @@ window.openSingleMedia = function (mediaSrc) {
     const videoEl = document.getElementById('story-video-display');
     const progressContainer = document.getElementById('story-progress-container');
 
-    // Limpa UI do story normal
-    if(progressContainer) progressContainer.innerHTML = '';
-    
+    if (progressContainer) progressContainer.innerHTML = '';
+
     const userLabel = document.querySelector('.story-username');
     if (userLabel) userLabel.textContent = "inforgram_oficial";
 
@@ -222,8 +199,6 @@ window.openSingleMedia = function (mediaSrc) {
     modal.classList.remove('hidden');
 }
 
-
-// --- 5. LÓGICA DE STORIES ---
 
 const storiesContent = {
     'web': [
@@ -294,8 +269,8 @@ window.openStory = function (category) {
 
 function setupProgressBars() {
     const container = document.getElementById('story-progress-container');
-    if(!container) return;
-    
+    if (!container) return;
+
     container.innerHTML = '';
 
     currentStoryImages.forEach((_, index) => {
@@ -316,22 +291,20 @@ function showCurrentStoryMedia() {
 
     const imgEl = document.getElementById('story-image-display');
     const videoEl = document.getElementById('story-video-display');
-    const icon = document.getElementById('story-like-icon'); // PEGA O ÍCONE
-    
+    const icon = document.getElementById('story-like-icon'); 
+
     const currentMedia = currentStoryImages[currentStoryIndex];
     const isVideo = currentMedia.endsWith('.mp4');
     let duration = DEFAULT_DURATION;
 
-    // --- NOVO: Verifica se essa foto específica já foi curtida ---
     const storyKey = `liked_story_${currentMedia}`;
-    if(localStorage.getItem(storyKey)) {
+    if (localStorage.getItem(storyKey)) {
         icon.textContent = 'favorite';
         icon.style.color = 'red';
     } else {
         icon.textContent = 'favorite_border';
         icon.style.color = 'white';
     }
-    // ------------------------------------------------------------
 
     imgEl.classList.add('hidden');
     videoEl.classList.add('hidden');
@@ -365,7 +338,6 @@ function animateProgressBar(duration) {
             if (i < currentStoryIndex) {
                 bar.style.width = '100%';
             } else if (i === currentStoryIndex) {
-                void bar.offsetWidth; // Força reflow para reiniciar animação
                 bar.style.animation = `fillBar ${duration}ms linear forwards`;
             }
         }
@@ -399,72 +371,106 @@ window.closeStory = function () {
 
 document.addEventListener('DOMContentLoaded', () => {
     const staticBtns = document.querySelectorAll('.static-like-btn');
-    
+
     staticBtns.forEach(btn => {
         const id = btn.dataset.id;
         const icon = btn.querySelector('span');
-        
-        // Verifica memória
-        if(localStorage.getItem(`liked_${id}`)) {
+
+        if (localStorage.getItem(`liked_${id}`)) {
             icon.textContent = 'favorite';
             icon.style.color = 'red';
         }
 
-        // Adiciona evento de clique
         btn.addEventListener('click', () => {
-            if(localStorage.getItem(`liked_${id}`)) {
-                // Se já curtiu, descurte (opcional, mas bom pra testar)
+            if (localStorage.getItem(`liked_${id}`)) {
                 localStorage.removeItem(`liked_${id}`);
                 icon.textContent = 'favorite_border';
                 icon.style.color = 'inherit';
                 updateStaticCount(id, -1);
             } else {
-                // Curte
                 localStorage.setItem(`liked_${id}`, 'true');
                 icon.textContent = 'favorite';
                 icon.style.color = 'red';
-                
-                // Efeito de pulso
+
                 icon.style.transform = 'scale(1.3)';
                 setTimeout(() => icon.style.transform = 'scale(1)', 200);
-                
+
                 updateStaticCount(id, 1);
             }
         });
     });
 });
 
-// Atualiza o número visualmente
 function updateStaticCount(id, amount) {
     const countEl = document.getElementById(`count-${id}`);
-    if(countEl) {
-        // Pega apenas o número do texto (ex: "154 curtidas" -> 154)
+    if (countEl) {
         let current = parseInt(countEl.innerText);
-        if(isNaN(current)) current = 0;
+        if (isNaN(current)) current = 0;
         countEl.innerText = `${current + amount} curtidas`;
     }
 }
 
-// 2. Curtir Stories (Toggle Visual)
-window.toggleStoryLike = function() {
+window.toggleStoryLike = function () {
     const icon = document.getElementById('story-like-icon');
-    const currentMedia = currentStoryImages[currentStoryIndex]; // Pega a foto atual
-    
-    // Cria uma chave única para essa foto (ex: liked_story_web_0)
-    // Assim ele lembra qual foto específica você curtiu!
-    const storyKey = `liked_story_${currentMedia}`; 
+    const currentMedia = currentStoryImages[currentStoryIndex];
+
+    const storyKey = `liked_story_${currentMedia}`;
 
     if (icon.textContent === 'favorite') {
-        // Descurtir
         icon.textContent = 'favorite_border';
         icon.style.color = 'white';
         localStorage.removeItem(storyKey);
     } else {
-        // Curtir
         icon.textContent = 'favorite';
         icon.style.color = 'red';
-        icon.style.animation = 'likeBounce 0.3s'; // Animação
+        icon.style.animation = 'likeBounce 0.3s'; 
         setTimeout(() => icon.style.animation = 'none', 300);
         localStorage.setItem(storyKey, 'true');
     }
 }
+
+async function tentarLoginAdmin() {
+    const passInput = document.getElementById('admin-pass');
+    
+    if (!passInput) return; 
+
+    const senha = passInput.value;
+    
+    if (senha === "admin123") {
+        document.body.classList.add('admin-mode');
+        alert("Modo Admin Ativado com Sucesso! 🔓");
+        
+        if(window.checkAdminStatus) window.checkAdminStatus();
+        
+        const modalAdmin = document.getElementById('modal-admin');
+        if(modalAdmin) modalAdmin.classList.add('hidden');
+        
+    } else {
+        alert("Senha incorreta! Tente novamente.");
+    }
+}
+
+function deslogarAdmin() {
+    document.body.classList.remove('admin-mode');
+    alert("Modo Admin Desativado! 🔒");
+    if(window.checkAdminStatus) window.checkAdminStatus();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLogin = document.getElementById('btn-login-admin');
+    const btnLogout = document.getElementById('btn-logout-admin');
+
+    if (btnLogin) {
+        btnLogin.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            tentarLoginAdmin();
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', (e) => {
+            e.preventDefault();
+            deslogarAdmin();
+        });
+    }
+});
