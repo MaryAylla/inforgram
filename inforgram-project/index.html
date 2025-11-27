@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inforgram - Feira das Profissões</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="img/inforgram-logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="insta-layout">
+
+    <header class="mobile-top-bar">
+        <h1 class="logo-custom" style="margin: 0;">Inforgram</h1>
+    </header>
+
+    <div class="app-container">
+
+        <nav class="sidebar-left">
+            <h1 class="logo-custom">Inforgram</h1>
+
+            <ul class="nav-links">
+                <li class="nav-item active" onclick="closeAllModals()">
+                    <span class="material-icons">home</span> <span>Página inicial</span>
+                </li>
+                <li class="nav-item" onclick="openModal('modal-search')">
+                    <span class="material-icons-outlined">search</span> <span>Pesquisa</span>
+                </li>
+                <li class="nav-item" onclick="openModal('modal-explore')">
+                    <span class="material-icons-outlined">explore</span> <span>Explorar</span>
+                </li>
+                <li class="nav-item" onclick="openModal('modal-reels')">
+                    <span class="material-icons-outlined">movie</span> <span>Reels</span>
+                </li>
+                <li class="nav-item" onclick="openModal('modal-messages')">
+                    <span class="material-icons-outlined">send</span> <span>Mensagens</span>
+                </li>
+                <li class="nav-item" onclick="openModal('modal-notifications')">
+                    <span class="material-icons-outlined">favorite_border</span> <span>Notificações</span>
+                </li>
+
+                <li class="nav-item" onclick="window.location.href='postar.html'">
+                    <span class="material-icons-outlined">add_box</span> <span>Criar</span>
+                </li>
+
+                <li class="nav-item" onclick="openModal('modal-profile')">
+                    <img src="img/inforgram-logo.jpg" class="profile-pic-nav" alt="Perfil">
+                    <span>Perfil</span>
+                </li>
+            </ul>
+
+            <div class="nav-footer">
+                <li class="nav-item" id="admin-trigger">
+                    <span class="material-icons-outlined">menu</span> <span>Mais</span>
+                </li>
+            </div>
+        </nav>
+
+        <main class="main-content">
+
+            <section class="stories-wrapper">
+                <div class="story-circle" onclick="openStory('web')">
+                    <div class="gradient-border"><img src="img/websto.jpg" alt=""></div>
+                    <p>Web</p>
+                </div>
+                <div class="story-circle" onclick="openStory('games')">
+                    <div class="gradient-border"><img src="img/gamesto.jpg" alt=""></div>
+                    <p>Games</p>
+                </div>
+                <div class="story-circle" onclick="openStory('robo')">
+                    <div class="gradient-border"><img src="img/robosto.jpg" alt=""></div>
+                    <p>Robótica</p>
+                </div>
+                <div class="story-circle" onclick="openStory('hard')">
+                    <div class="gradient-border"><img src="img/hardsto.jpg" alt=""></div>
+                    <p>Hardware</p>
+                </div>
+                <div class="story-circle" onclick="openStory('moment')">
+                    <div class="gradient-border"><img src="img/momesto.jpg" alt=""></div>
+                    <p>Momentos</p>
+                </div>
+            </section>
+
+            <div class="split-feed-container">
+                
+                <div class="feed-column live-feed">
+                    <h3 class="feed-title">💬 Comentários em Tempo Real</h3>
+                    <div id="feed-container"></div>
+                </div>
+
+                <div class="mobile-suggestions-bar">
+                    <h3 class="feed-title">👥 Sugestões para seguir</h3>
+                    <div class="mobile-suggestions-scroll">
+                        <div class="suggestion-card-mobile">
+                            <img src="img/veronicaperfil.jpg" class="avatar-small">
+                            <span class="username">anaveronicafc</span>
+                            <button onclick="window.location.href='https://instagram.com/anaveronicafc'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                        <div class="suggestion-card-mobile">
+                            <img src="img/elianeperfil.jpg" class="avatar-small">
+                            <span class="username">elianem4iara</span>
+                            <button onclick="window.location.href='https://instagram.com/elianem4iara'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                        <div class="suggestion-card-mobile">
+                            <img src="img/1anoperfil.jpg" class="avatar-small">
+                            <span class="username">ep1.infor</span>
+                            <button onclick="window.location.href='https://instagram.com/ep1.infor'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                        <div class="suggestion-card-mobile">
+                            <img src="img/turma-2ano.jpg" class="avatar-small">
+                            <span class="username">2infor.ep</span>
+                            <button onclick="window.location.href='https://instagram.com/2infor.ep'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                        <div class="suggestion-card-mobile">
+                            <img src="img/3anoperfil.jpg" class="avatar-small">
+                            <span class="username">3infor_ep</span>
+                            <button onclick="window.location.href='https://instagram.com/3infor_ep'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                        <div class="suggestion-card-mobile">
+                            <img src="img/epperfil.jpg" class="avatar-small">
+                            <span class="username">ep.napoleao</span>
+                            <button onclick="window.location.href='https://instagram.com/ep.napoleao'" class="btn-primary-sm">Seguir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-column course-feed">
+                    <h3 class="feed-title">🎓 Destaques do Curso</h3>
+                    <article class="post-card official-post">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <img src="img/inforgram-logo.jpg" class="avatar-small" alt="Logo">
+                                <span class="username">inforgram_oficial</span>
+                                <span class="material-icons"
+                                    style="color:#0095F6; font-size:14px; margin-left:4px;">verified</span>
+                            </div>
+                            <span class="material-icons-outlined">more_horiz</span>
+                        </div>
+                        <div class="card-image">
+                            <img src="img/turma-2ano.jpg" alt="Post 1">
+                        </div>
+                        <div class="card-content">
+                            <p><span class="username">inforgram_oficial</span> O mercado de TI tem milhares de vagas
+                                abertas! Venha se preparar conosco! </p>
+                        </div>
+                        <div class="card-actions">
+        <div class="static-like-btn" data-id="destaque-1" style="display:flex; align-items:center; cursor:pointer;">
+            <span class="material-icons-outlined">favorite_border</span>
+        </div>
+        <span class="material-icons-outlined">chat_bubble_outline</span>
+        <span class="material-icons-outlined">send</span>
+        <span class="material-icons-outlined" style="margin-left: auto;">bookmark_border</span>
+    </div>
+    <div class="likes-count" id="count-destaque-1" style="padding: 0 15px; font-weight: bold; font-size: 0.9rem;">154 curtidas</div>
+                    </article>
+
+                    <article class="post-card official-post">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <img src="img/inforgram-logo.jpg" class="avatar-small" alt="Logo">
+                                <span class="username">inforgram_oficial</span>
+                                <span class="material-icons"
+                                    style="color:#0095F6; font-size:14px; margin-left:4px;">verified</span>
+                            </div>
+                            <span class="material-icons-outlined">more_horiz</span>
+                        </div>
+                        <div class="card-image">
+                            <img src="img/fotolab.jpeg" alt="Post 2">
+                        </div>
+                        <div class="card-content">
+                            <p><span class="username">inforgram_oficial</span> Nossos laboratórios contam com
+                                equipamentos
+                                de última geração! Vem ser infor!</p>
+                        </div>
+                        <div class="card-actions">
+        <div class="static-like-btn" data-id="destaque-2" style="display:flex; align-items:center; cursor:pointer;">
+            <span class="material-icons-outlined">favorite_border</span>
+        </div>
+        <span class="material-icons-outlined">chat_bubble_outline</span>
+        <span class="material-icons-outlined">send</span>
+        <span class="material-icons-outlined" style="margin-left: auto;">bookmark_border</span>
+    </div>
+    <div class="likes-count" id="count-destaque-2" style="padding: 0 15px; font-weight: bold; font-size: 0.9rem;">89 curtidas</div>
+                    </article>
+
+                    <article class="post-card official-post">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <img src="img/inforgram-logo.jpg" class="avatar-small" alt="Logo">
+                                <span class="username">inforgram_oficial</span>
+                                <span class="material-icons"
+                                    style="color:#0095F6; font-size:14px; margin-left:4px;">verified</span>
+                            </div>
+                            <span class="material-icons-outlined">more_horiz</span>
+                        </div>
+                        <div class="card-image">
+                            <img src="img/story17.jpeg" alt="Post 2">
+                        </div>
+                        <div class="card-content">
+                            <p><span class="username">inforgram_oficial</span> Nossos Xangô e Iansã do IpêNapô 2024!</p>
+                        </div>
+                        <div class="card-actions">
+        <div class="static-like-btn" data-id="destaque-3" style="display:flex; align-items:center; cursor:pointer;">
+            <span class="material-icons-outlined">favorite_border</span>
+        </div>
+        <span class="material-icons-outlined">chat_bubble_outline</span>
+        <span class="material-icons-outlined">send</span>
+        <span class="material-icons-outlined" style="margin-left: auto;">bookmark_border</span>
+    </div>
+    <div class="likes-count" id="count-destaque-3" style="padding: 0 15px; font-weight: bold; font-size: 0.9rem;">230 curtidas</div>
+                    </article>
+
+                    <article class="post-card official-post">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <img src="img/inforgram-logo.jpg" class="avatar-small" alt="Logo">
+                                <span class="username">inforgram_oficial</span>
+                                <span class="material-icons"
+                                    style="color:#0095F6; font-size:14px; margin-left:4px;">verified</span>
+                            </div>
+                            <span class="material-icons-outlined">more_horiz</span>
+                        </div>
+                        <div class="card-image">
+                            <img src="img/ipe2025.JPG" alt="Post 2">
+                        </div>
+                        <div class="card-content">
+                            <p><span class="username">inforgram_oficial</span> Nossos Oxóssi e seu pavão do IpêNapô
+                                2025!</p>
+                        </div>
+                        <div class="card-actions">
+        <div class="static-like-btn" data-id="destaque-4" style="display:flex; align-items:center; cursor:pointer;">
+            <span class="material-icons-outlined">favorite_border</span>
+        </div>
+        <span class="material-icons-outlined">chat_bubble_outline</span>
+        <span class="material-icons-outlined">send</span>
+        <span class="material-icons-outlined" style="margin-left: auto;">bookmark_border</span>
+    </div>
+    <div class="likes-count" id="count-destaque-4" style="padding: 0 15px; font-weight: bold; font-size: 0.9rem;">311 curtidas</div>
+                    </article>
+
+
+                </div>
+            </div>
+        </main>
+
+        <aside class="sidebar-right">
+            <div class="user-profile-mini">
+                <img src="img/inforgram-logo.jpg" class="avatar-large" alt="Perfil">
+                <div class="profile-info">
+                    <span class="username">inforgram_oficial</span>
+                    <span class="sub-name">Feira das Profissões</span>
+                </div>
+                <a href="#" class="link-action">Mudar</a>
+            </div>
+
+            <div class="suggestions-header">
+                <span>Perfis para visitar</span>
+            </div>
+
+            <div class="suggestions-list">
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/veronicaperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">anaveronicafc</span>
+                            <span class="sub-text">Coordenadora do curso</span>
+                        </div>
+                    </div>
+                    <a href="https://instagram.com/anaveronicafc" target="_blank" class="follow-btn">Ver</a>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/elianeperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">elianem4iara</span>
+                            <span class="sub-text">Professora do curso</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/elianem4iara" target="_blank" class="follow-btn">Ver</a>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/1anoperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">ep1.infor</span>
+                            <span class="sub-text">Turma 1º Ano</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/ep1.infor" target="_blank" class="follow-btn">Ver</a>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/2anoperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">2infor.ep</span>
+                            <span class="sub-text">Turma 2º Ano</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/2infor.ep" target="_blank" class="follow-btn">Ver</a>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/3anoperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">3infor_ep</span>
+                            <span class="sub-text">Turma 3º Ano</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/3infor_ep" target="_blank" class="follow-btn">Ver</a>
+                </div>
+
+                <div class="suggestion-item">
+                    <div class="user-info">
+                        <img src="img/epperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info">
+                            <span class="username">ep.napoleao</span>
+                            <span class="sub-text">Escola Napoleão</span>
+                        </div>
+                    </div>
+                    <a href="https://www.instagram.com/ep.napoleao" target="_blank" class="follow-btn">Ver</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <p>© 2025 INFORGRAM</p>
+            </div>
+        </aside>
+    </div>
+
+    <div id="modal-profile" class="modal-overlay hidden">
+        <div class="modal-window profile-window">
+            <span class="close-modal material-icons-outlined">close</span>
+            <header class="profile-header">
+                <img src="img/inforgram-logo.jpg" class="profile-pic-large" alt="Perfil Grande">
+                <div class="profile-stats">
+                    <div class="profile-name-action">
+                        <h2>inforgram_oficial</h2>
+                        <button class="btn-edit">Editar perfil</button>
+                    </div>
+                    <ul class="stats-list">
+                        <li><strong>15</strong> publicações</li>
+                        <li><strong>1.2M</strong> seguidores</li>
+                        <li><strong>30</strong> seguindo</li>
+                    </ul>
+                    <div class="profile-bio">
+                        <span class="bio-name">Inforgram Project 🚀</span>
+                        <p>O perfil oficial do projeto.</p>
+                    </div>
+                </div>
+            </header>
+            <div class="profile-grid">
+                <div class="grid-item"><img src="img/inforfeed.jpg" alt=""></div>
+                <div class="grid-item"><img src="img/infor-feed-2.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/infor-feed-3.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/infor-feed-4.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/infor-feed-5.jpeg" alt=""></div>
+                <div class="grid-item"><img src="img/infor-feed-6.jpeg" alt=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-search" class="modal-overlay hidden">
+        <div class="modal-window search-window">
+            <span class="close-modal material-icons-outlined">close</span>
+            <h3>Pesquisar</h3>
+            <div class="search-bar-fake">
+                <span class="material-icons-outlined">search</span>
+                <input type="text" placeholder="Pesquisar">
+            </div>
+            <div class="search-results">
+                <h4>Sugestões</h4>
+                <a href="https://www.instagram.com/2agroo" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/2agroperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">2agroo</span><span class="sub-text">2° de
+                                Agro</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/2contabil_" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/2contaperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">2contabil_</span><span class="sub-text">2° de
+                                Contabil</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/gremioforcaestudantill" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/gremioperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">gremioforcaestudantill</span><span
+                                class="sub-text">Grêmio Estudantil</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/professor__romeu" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/romeuperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">professor__romeu</span><span
+                                class="sub-text">Diretor Romeu</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/1agroo.ep" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/1agroperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">1agroo.ep</span><span class="sub-text">1° de
+                                Agro</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/1contabil_" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/1contabilperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">1contabil_</span><span class="sub-text">1° de
+                                Contabil</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/_adm1a_" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/1admperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">_adm1a_</span><span class="sub-text">1° de
+                                Adm</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/2adm.ep" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/2admperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">2adm.ep</span><span class="sub-text">2° de
+                                Adm</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/isakalves00" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/isakperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">isakalves00</span><span class="sub-text">Professor
+                                de Contabil</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/vanuza_xavier" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/vanuzaperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">vanuza_xavier</span><span
+                                class="sub-text">Professora de Agro</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/eronzoot" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/eronperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">eronzoot</span><span class="sub-text">Professor de
+                                Agro</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/nonato.ra" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/nonatoperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">nonato.ra</span><span class="sub-text">Professor
+                                de Adm</span></div>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/luisalineoliveira" target="_blank" class="search-item">
+                    <div class="user-info">
+                        <img src="img/luizaperfil.jpg" class="avatar-small"
+                            onerror="this.src='https://via.placeholder.com/32'">
+                        <div class="text-info"><span class="username">luisalineoliveira</span><span
+                                class="sub-text">Professora de Adm</span></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-reels" class="modal-overlay hidden">
+        <div class="modal-window reels-window">
+            <span class="close-modal material-icons-outlined" style="z-index: 100;">close</span>
+            <div class="reels-container">
+                <div class="reel-item">
+                    <video class="reel-video" loop muted onclick="togglePlay(this)">
+                        <source src="img/videofeira.mp4" type="video/mp4">
+                    </video>
+                    <div class="reel-overlay-info">
+                        <div class="user-reel"><img src="img/inforgram-logo.jpg"
+                                class="avatar-small"><span>inforgram_oficial</span></div>
+                        <p>Bem-vindos à Feira! 🚀 Clique para som.</p>
+                    </div>
+                    <div class="reel-side-actions">
+                        <span class="material-icons">favorite</span>
+                        <p>12K</p>
+                        <span class="material-icons">chat_bubble</span>
+                        <p>340</p>
+                    </div>
+                </div>
+                <div class="reel-item">
+                    <video class="reel-video" loop muted onclick="togglePlay(this)">
+                        <source src="img/video-explore-1.mp4" type="video/mp4">
+                    </video>
+                    <div class="reel-overlay-info">
+                        <div class="user-reel"><img src="img/inforgram-logo.jpg"
+                                class="avatar-small"><span>inforgram_oficial</span></div>
+                        <p>Vem ser infor!!!🦊❤️</p>
+                    </div>
+                </div>
+                <div class="reel-item">
+                    <video class="reel-video" loop muted onclick="togglePlay(this)">
+                        <source src="img/videoreelsconta.mp4" type="video/mp4">
+                    </video>
+                    <div class="reel-overlay-info">
+                        <div class="user-reel"><img src="img/inforgram-logo.jpg"
+                                class="avatar-small"><span>inforgram_oficial</span></div>
+                        <p>Feira das Profissões Contabil!</p>
+                    </div>
+                </div>
+                <div class="reel-item">
+                    <video class="reel-video" loop muted onclick="togglePlay(this)">
+                        <source src="img/beijosbluesvideo.mp4" type="video/mp4">
+                    </video>
+                    <div class="reel-overlay-info">
+                        <div class="user-reel"><img src="img/inforgram-logo.jpg"
+                                class="avatar-small"><span>inforgram_oficial</span></div>
+                        <p>Beijos, blues e poesia 💋💋💋</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-messages" class="modal-overlay hidden">
+        <div class="modal-window messages-window">
+            <span class="close-modal material-icons-outlined">close</span>
+            <div class="msg-sidebar">
+                <div class="msg-header">
+                    <span>inforgram_dm <span class="material-icons-outlined">expand_more</span></span>
+                    <span class="material-icons-outlined">edit_note</span>
+                </div>
+                <div class="msg-list">
+                    <div class="msg-item active">
+                        <img src="img/andersonperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Anderson</span><span class="preview"> Reagiu ao seu
+                                story. 😍</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/romeuperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Dr. Romeu</span><span class="preview"> Infor é o
+                                melhor curso!</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/walisomperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Walisom</span><span class="preview"> Apaga aquela
+                                foto!😡</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/ivoneteperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Ivonete</span><span class="preview"> Saudade de ser
+                                mediadora</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/veronicaperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Verônica</span><span class="preview"> Avisa pra
+                                Gabriel não ir de vermelho!!!</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/elianeperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Eliane</span><span class="preview"> E a
+                                apresentação de Startup?</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/priscilaperfil.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Priscila</span><span class="preview"> Saudades de
+                                Infor!❤️</span></div>
+                    </div>
+                    <div class="msg-item">
+                        <img src="img/turma-2ano.jpg" class="avatar-small">
+                        <div class="msg-text"><span class="username">Bate-papo em grupo: Hackers</span><span
+                                class="preview"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="msg-chat-area">
+                <div class="chat-placeholder">
+                    <span class="material-icons-outlined" style="font-size: 4rem;">send</span>
+                    <h3>Suas Mensagens</h3>
+                    <p>Envie fotos e mensagens privadas.</p>
+                    <button class="btn-primary-sm">Enviar mensagem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-notifications" class="modal-overlay hidden">
+        <div class="modal-window notifications-window">
+            <span class="close-modal material-icons-outlined">close</span>
+            <h3>Notificações</h3>
+            <div class="notif-group">
+                <h4>Hoje</h4>
+                <div class="notif-item">
+                    <img src="img/andersonperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">Anderson</span> curtiu seu story.</p>
+                    <img src="img/story1.jpeg" class="liked-photo" style="object-fit:cover; cursor:pointer;"
+                        onclick="openSingleMedia('img/story1.jpeg')">
+                </div>
+                <div class="notif-item">
+                    <img src="img/samuelperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">Samuel</span> começou a seguir você. Cuidado!</p>
+                    <button class="btn-follow">Seguir</button>
+                </div>
+                <div class="notif-item">
+                    <img src="img/fabianaperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">Fabiana</span> comentou: E era hj a feira??💀💀💀</p>
+                    <img src="img/story3.jpeg" class="liked-photo" style="object-fit:cover; cursor:pointer;"
+                        onclick="openSingleMedia('img/story3.jpeg')">
+                </div>
+                <div class="notif-item">
+                    <img src="img/priscilaperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">Priscila</span> curtiu sua foto.</p>
+                    <img src="img/story5.jpeg" class="liked-photo" style="object-fit:cover; cursor:pointer;"
+                        onclick="openSingleMedia('img/story5.jpeg')">
+                </div>
+                <div class="notif-item">
+                    <img src="img/gabrielperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">Gabriel</span> comentou: Ê RAPAIZZZ 😡😡😡😡</p>
+                    <img src="img/story19.jpeg" class="liked-photo" style="object-fit:cover;  cursor:pointer;"
+                        onclick="openSingleMedia('img/story19.jpeg')">
+                </div>
+            </div>
+            <div class="notif-group">
+                <h4>Esta semana</h4>
+                <div class="notif-item">
+                    <img src="img/2anoperfil.jpg" class="avatar-small" style="object-fit:cover;">
+                    <p><span class="username">2infor.ep</span> publicou um novo vídeo.</p>
+                    <img src="img/fotovideo.jpg" class="liked-photo" style="object-fit:cover; cursor:pointer;"
+                        onclick="openSingleMedia('img/fotovideo.jpg')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-explore" class="modal-overlay hidden">
+        <div class="modal-window explore-window">
+            <span class="close-modal material-icons-outlined">close</span>
+            <div class="explore-grid">
+                <div class="ex-item big">
+                    <video class="explore-video" loop muted playsinline
+                        style="width:100%; height:100%; object-fit:cover;">
+                        <source src="img/video-explore-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ex-item"><img src="img/fotofeed.png" alt=""
+                        style="width:100%; height:100%; object-fit:cover;"></div>
+                <div class="ex-item">
+                    <video class="explore-video" loop muted playsinline
+                        style="width:100%; height:100%; object-fit:cover;">
+                        <source src="img/video-explore-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="ex-item"><img src="img/doutorfeed.png" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="ex-item"><img src="img/niververo.png" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="ex-item"><img src="img/pretofeed.png" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-story-viewer" class="modal-overlay hidden" style="z-index: 9999;">
+        <div class="story-viewer-content">
+            <div id="story-progress-container" class="story-progress-wrapper" style="z-index: 10002;"></div>
+            <div class="story-header" style="z-index: 10002;">
+                <div class="user-story-info">
+                    <img src="img/inforgram-logo.jpg" class="avatar-small story-avatar"
+                        onerror="this.src='https://via.placeholder.com/32'">
+                    <span class="story-username">inforgram_oficial</span>
+                </div>
+                <div class="story-actions-top">
+                    <span class="material-icons-outlined close-story-btn" onclick="closeStory()"
+                        style="cursor: pointer;">close</span>
+                </div>
+            </div>
+            <div class="tap-area-left" onclick="prevStory()" style="z-index: 10001;"></div>
+            <div class="tap-area-right" onclick="nextStory()" style="z-index: 10001;"></div>
+            <img id="story-image-display" src="" alt="Story" style="z-index: 10000;">
+            <video id="story-video-display" class="hidden" playsinline webkit-playsinline style="z-index: 10000;">
+                <source src="" type="video/mp4">
+            </video>
+            <div class="story-footer" style="z-index: 10002;">
+                <div class="story-input"><input type="text" placeholder="Enviar mensagem"></div>
+                
+                <span id="story-like-icon" class="material-icons-outlined story-icon" onclick="toggleStoryLike()">favorite_border</span>
+                
+                <span class="material-icons-outlined story-icon">send</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-admin" class="modal-overlay hidden">
+        <div class="modal-window" style="padding: 2rem; width: auto; height: auto; text-align: center;">
+            <span class="close-modal material-icons-outlined">close</span>
+            <h3>Configurações</h3>
+            <div id="admin-login-form">
+                <p>Área restrita para professores/líderes.</p>
+                <input type="password" id="admin-pass" placeholder="Senha"
+                    style="padding:10px; margin:10px 0; width:100%; background:#333; color:white; border:none;">
+                <button id="btn-login-admin"
+                    style="background:#0095F6; color:white; padding:10px 20px; border:none; cursor:pointer; width:100%;">Entrar
+                    como Admin</button>
+            </div>
+            <div id="admin-logout-area" class="hidden">
+                <p style="color:#00FF00; margin-bottom:15px;">Você é Administrador ✅</p>
+                <button id="btn-logout-admin"
+                    style="background:#ff3b30; color:white; padding:10px 20px; border:none; cursor:pointer; width:100%;">Desativar
+                    Admin (Sair)</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+    <script>
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+            document.querySelectorAll('video').forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+        }
+
+        function openModal(id) {
+            document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.remove('hidden');
+                if (id === 'modal-explore') {
+                    const videos = el.querySelectorAll('video');
+                    videos.forEach(v => {
+                        v.currentTime = 0;
+                        v.play().catch(e => console.log("Erro ao dar play no explorar:", e));
+                    });
+                }
+                if (typeof checkAdminStatus === 'function') checkAdminStatus();
+            }
+        }
+
+        function togglePlay(video) {
+            if (video.paused) {
+                video.play();
+                video.muted = false;
+            } else {
+                video.pause();
+            }
+        }
+
+        function checkAdminStatus() {
+            if (document.body.classList.contains('admin-mode')) {
+                document.getElementById('admin-login-form').classList.add('hidden');
+                document.getElementById('admin-logout-area').classList.remove('hidden');
+            } else {
+                document.getElementById('admin-login-form').classList.remove('hidden');
+                document.getElementById('admin-logout-area').classList.add('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.close-modal').forEach(btn => btn.addEventListener('click', closeAllModals));
+            document.getElementById('admin-trigger').addEventListener('click', () => openModal('modal-admin'));
+        });
+
+    </script>
+</body>
+
+</html>

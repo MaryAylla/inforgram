@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Postagem</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="page-post">
+
+    <div class="post-form-container">
+        <header style="text-align:center; margin-bottom:20px; color:white;">
+            <h2>Criar nova publicação</h2>
+        </header>
+
+        <form id="post-form">
+            <div class="input-group">
+                <label for="username">Seu Nome</label>
+                <input type="text" id="username" placeholder="Digite seu nome..." required maxlength="20">
+            </div>
+
+            <div class="input-group">
+                <label for="message">Legenda</label>
+                <textarea id="message" placeholder="Escreva uma legenda..." required maxlength="140" rows="4"></textarea>
+            </div>
+
+            <button type="submit" id="btn-submit" class="btn-primary">Compartilhar</button>
+            <button type="button" onclick="window.location.href='index.html'" style="width:100%; margin-top:10px; background:transparent; color:#888; border:none; cursor:pointer;">Cancelar</button>
+        </form>
+        
+        <div id="success-message" class="hidden" style="text-align:center; color:white;">
+            <h3>Enviado! 🚀</h3>
+            <p>Sua postagem já está no telão.</p>
+            <button onclick="location.reload()" class="btn-primary" style="margin-top:15px;">Enviar outra</button>
+            <button onclick="window.location.href='index.html'" style="margin-top:10px; background:none; border:none; color:#0095F6; cursor:pointer;">Voltar ao Feed</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
